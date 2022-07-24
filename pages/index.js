@@ -1,11 +1,14 @@
 import React from 'react';
+// import CloudinaryImage from '@cloudinary/url-gen';
+import {CloudinaryImage} from "@cloudinary/url-gen"
 
 export default function Upload() {
   const [fileToUpload, setFileToUpload] = React.useState();
   const [publicId, setPublicId] = React.useState('');
   const [image, setImage] = React.useState();
 
-  function onSubmit() {
+
+ async function onSubmit() {
     let formData = new FormData();
 
     formData.append('image', fileToUpload)
@@ -20,8 +23,10 @@ export default function Upload() {
     .then(res => res.json())
     .then(results => setImage(results))
     .catch(err => console.log(err))
-  }
 
+    const newImage = new CloudinaryImage('${result.publicId}.jpg');
+  }
+ 
   return(
     <div>
       <h2>Image Upload</h2>
